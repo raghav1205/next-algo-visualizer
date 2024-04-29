@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "start-user-app": "cd ./apps/user-app && npm run start"
+    "start-user-app": "npm run start"
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",
