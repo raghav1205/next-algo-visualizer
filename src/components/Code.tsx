@@ -3,7 +3,7 @@ import { useState } from 'react'
 import CodeDisplay, { CodeDisplayProps } from './CodeDisplay'
 
 
-const Code = ({ code }: CodeDisplayProps) => {
+const Code = ({ solutions }: CodeDisplayProps) => {
    
     const [showCode, setShowCode] = useState(false)
     const toggleExplanation = () => {
@@ -22,7 +22,7 @@ const Code = ({ code }: CodeDisplayProps) => {
                 </div>
                 <div className={`transition-[max-height] duration-[800ms] ease-in-out overflow-hidden  ${showCode ? 'max-h-fit' : 'max-h-0'}`}>
                     <p className="text-lg mt-4 rounded-md bg-[#0F172A] md:p-1">
-                        <CodeDisplay code={code} />
+                        <CodeDisplay solutions={solutions} />
                     </p>
                 </div>
             </div>

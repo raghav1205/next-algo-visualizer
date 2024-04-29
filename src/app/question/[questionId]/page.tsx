@@ -4,6 +4,14 @@ import MinPassesInMatrix from "@/components/MinPassesInMatrix"
 import Code from "@/components/Code"
 import Explanation from "@/components/Explanation"
 
+interface TransformedData {
+    title: string | null;
+    description: string;
+    explanation?: string;
+    componentName: string;
+    solutions: { [key: string]: string[] }
+}
+
 const getQuestionData = async (questionId: string) => {
     console.log(questionId)
     const data = await prisma.problem.findUnique({
@@ -23,10 +31,17 @@ const getQuestionData = async (questionId: string) => {
             }
         }
     })
-    const tranformedData = { ...data };
+    const tranformedData: TransformedData = { 
+        ...data,
+        title: data?.title ?? null,
+        description: data?.description ?? '',
+        componentName: data?.componentName ?? '',
+        solutions: {} 
+    };
     if (data) {
-        tranformedData.solutions = transformSolutions(data.solutions) as unknown as { language: string; code: string; }[];
+        tranformedData.solutions = transformSolutions(data.solutions);
     }
+    console.log(tranformedData)
     return tranformedData;
 }
 
@@ -38,6 +53,7 @@ function transformSolutions(solutions: { language: string; code: string }[]) {
         }
         transformed[solution.language].push(`${solution.code}`);
     });
+    console.log(transformed)
     return transformed;
 }
 
@@ -67,7 +83,7 @@ export default async function ({ params }: { params: { questionId: string } }) {
 
             <div className='text-center p-10 flex flex-col gap-3'>
                 <Explanation explanationText={data?.explanation ?? ''} />
-                {data.solutions && <Code code={data?.solutions as { language: string; code: string; }[]} />}
+                {data.solutions && <Code solutions={data?.solutions} />}
 
             </div>
         </div>

@@ -4,20 +4,30 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export interface CodeDisplayProps {
-    code: { [key: string]: string[] }
+    solutions: { [key: string]: string[] }
 }
 
-const CodeDisplay = ({ code }: CodeDisplayProps) => {
+// export interface CodeDisplayProps {
+//     solutions?: {
+//         code: string;
+//         language: string;
+//     }[]
+// }
+
+const CodeDisplay = ({ solutions }: CodeDisplayProps) => {
+    console.log(solutions)
     const [currentSelectedLanguage, setCurrentSelectedLanguage] = useState<string>(() => {
-        return Object.keys(code)[0];
+        if (!solutions) return "";
+        return Object.keys(solutions)[0];
     });
     const [currentCode, setCurrentCode] = useState<string>(() => {
-        return code[currentSelectedLanguage][0]
+        if (!currentSelectedLanguage) return "";
+            return solutions[currentSelectedLanguage][0];
     });
     return (
         <div className="p-4  rounded-lg overflow-auto">
             <div className='flex justify-between'>
-                <SolutionSelector code={code[currentSelectedLanguage]} currentCode={currentCode} setCurrentCode={setCurrentCode} />
+                <SolutionSelector code={solutions[currentSelectedLanguage]} currentCode={currentCode} setCurrentCode={setCurrentCode} />
                 <select
                     name="language"
                     id="language"
@@ -26,10 +36,10 @@ const CodeDisplay = ({ code }: CodeDisplayProps) => {
                         const selectedLanguage = e.target.value;
                         console.log(selectedLanguage, "ASDF");
                         setCurrentSelectedLanguage(selectedLanguage);
-                        setCurrentCode(code[selectedLanguage][0]);
+                        setCurrentCode(solutions[selectedLanguage][0]);
                     }}
                 >
-                    {Object.keys(code).map((c, i) => (
+                    {Object.keys(solutions).map((c, i) => (
                         <option key={i} value={c}>
                             {c}
                         </option>
