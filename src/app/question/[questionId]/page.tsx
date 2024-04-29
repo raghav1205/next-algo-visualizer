@@ -41,7 +41,7 @@ const getQuestionData = async (questionId: string) => {
     if (data) {
         tranformedData.solutions = transformSolutions(data.solutions);
     }
-    console.log(tranformedData)
+    // console.log(tranformedData)
     return tranformedData;
 }
 
@@ -53,7 +53,7 @@ function transformSolutions(solutions: { language: string; code: string }[]) {
         }
         transformed[solution.language].push(`${solution.code}`);
     });
-    console.log(transformed)
+    // console.log(transformed)
     return transformed;
 }
 
