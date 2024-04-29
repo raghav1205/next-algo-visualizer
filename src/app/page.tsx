@@ -24,7 +24,6 @@ export default async function Home() {
   const data: Question[] = await fetchData();
   return (
     <>
-
       <List questionsList={data} />
     </>
   );

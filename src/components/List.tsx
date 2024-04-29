@@ -10,6 +10,7 @@ const List = ({ questionsList }: { questionsList: Question[] }) => {
     console.log(questionsList)
     return (
         <div>
+            <h2>Problems</h2>
             {
                 questionsList?.map((question, i) => (
                     <div key={i} className=' text-xl p-5'>
