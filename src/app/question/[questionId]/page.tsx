@@ -83,7 +83,7 @@ export default async function ({ params }: { params: { questionId: string } }) {
 
             <div className='text-center p-10 flex flex-col gap-3'>
                 <Explanation explanationText={data?.explanation ?? ''} />
-                {data.solutions && <Code solutions={data?.solutions} />}
+                {/* {data.solutions && <Code solutions={data?.solutions} />} */}
 
             </div>
         </div>
