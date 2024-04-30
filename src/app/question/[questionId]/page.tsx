@@ -75,7 +75,7 @@ export default async function ({ params }: { params: { questionId: string } }) {
     return (
         <div className="overflow-auto">
             <div className='text-center p-10 h-fit '>
-                {/* <ProblemStatement name={data?.title ?? ''} statement={data?.description ?? ''} /> */}
+                <ProblemStatement name={data?.title ?? ''} statement={data?.description ?? ''} />
             </div>
             <div>
                 {getComponent(data?.componentName ?? '')}
