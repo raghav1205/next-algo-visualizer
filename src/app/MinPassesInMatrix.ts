@@ -1,12 +1,14 @@
+import React from "react";
+
 type Matrix = number[][];
 
 let r: number[] = [-1, 1, 0, 0];
 let c: number[] = [0, 0, 1, -1];
 let time = 500
-function minimumPassesOfMatrix(matrix: Matrix, setMatrix: React.Dispatch<React.SetStateAction<Matrix>>, queue: [number, number][], setQueue: React.Dispatch<React.SetStateAction<[number, number][]>>, passes: number, setPasses: React.Dispatch<React.SetStateAction<number>>, setCurrentElement: React.Dispatch<React.SetStateAction<[number,number]>>): Promise<number> {
-    return minimumPassesHelper(matrix, setMatrix, queue, setQueue, passes, setPasses, setCurrentElement);
+function minimumPassesOfMatrix(matrix: Matrix, setMatrix: React.Dispatch<React.SetStateAction<Matrix>>, queue: [number, number][], setQueue: React.Dispatch<React.SetStateAction<[number, number][]>>, passes: number, setPasses: React.Dispatch<React.SetStateAction<number>>, setCurrentElement: React.Dispatch<React.SetStateAction<[number,number]>>, setIsRunning: React.Dispatch<React.SetStateAction<boolean>>): Promise<number> {
+    return minimumPassesHelper(matrix, setMatrix, queue, setQueue, passes, setPasses, setCurrentElement, setIsRunning);
 }
-async function minimumPassesHelper(matrix: Matrix, setMatrix: React.Dispatch<React.SetStateAction<Matrix>>, queue: [number, number][], setQueue: React.Dispatch<React.SetStateAction<[number, number][]>>, passes: number, setPasses: React.Dispatch<React.SetStateAction<number>>, setCurrentElement: React.Dispatch<React.SetStateAction<[number,number]>>): Promise<number> {
+async function minimumPassesHelper(matrix: Matrix, setMatrix: React.Dispatch<React.SetStateAction<Matrix>>, queue: [number, number][], setQueue: React.Dispatch<React.SetStateAction<[number, number][]>>, passes: number, setPasses: React.Dispatch<React.SetStateAction<number>>, setCurrentElement: React.Dispatch<React.SetStateAction<[number,number]>>, setIsRunning: React.Dispatch<React.SetStateAction<boolean>>): Promise<number> {
     for (let row = 0; row < matrix.length; row++) {
         for (let col = 0; col < matrix[row].length; col++) {
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -56,7 +58,7 @@ async function minimumPassesHelper(matrix: Matrix, setMatrix: React.Dispatch<Rea
         }
     }
     setCurrentElement([-1, -1])
-
+    setIsRunning(false)
     if (containsNegative(matrix)) {
         return -1;
     }

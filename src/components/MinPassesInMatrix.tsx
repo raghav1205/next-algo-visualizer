@@ -11,11 +11,14 @@ function MinPassesInMatrix() {
     const [queue, setQueue] = useState<[number, number][]>([])
     const [passes, setPasses] = useState<number>(0)
     const [currentELement, setCurrentElement] = useState<[number, number]>([-1, -1])
+    const [isRunning, setIsRunning] = useState<boolean>(false)
 
     const handleSolve = (matrix: number[][]) => {
-        minimumPassesOfMatrix(matrix, setMatrix, queue, setQueue, passes, setPasses, setCurrentElement)
+        setIsRunning(true)
+        if (queue.length === 0) {
+            minimumPassesOfMatrix(matrix, setMatrix, queue, setQueue, passes, setPasses, setCurrentElement, setIsRunning);
+        }
     }
-
 
     return (
         <div className='bg-[#030712]  overflow-auto text-black'>
@@ -74,7 +77,7 @@ function MinPassesInMatrix() {
                     </div>
 
                     <div className='flex justify-center mt-2 text-md font-semibold'>
-                        <button className='bg-[#F9FAFB] text-black border rounded-md p-2 px-3 disabled:bg-slate-300 ' disabled={queue?.length > 0 } onClick={() => handleSolve(matrix)}>
+                        <button className='bg-[#F9FAFB] text-black border rounded-md p-2 px-3 disabled:bg-slate-300 ' disabled={isRunning } onClick={() => handleSolve(matrix)}>
                             Run Algorithm
                         </button>
                     </div>
