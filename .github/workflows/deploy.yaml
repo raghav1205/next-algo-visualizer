@@ -43,7 +43,6 @@ jobs:
             sudo docker pull raghav1205/next_ds_visualizer:latest
             sudo docker stop web-app || true
             sudo docker rm web-app || true
-            sudo docker run -d --name web-app -p 3000:3000 \ 
-             -e DATABASE_URL=${{secrets.DATABASE_URL}} \
+            sudo docker run -d --name web-app -p 3000:3000 \
+            -e DATABASE_URL='${{ secrets.DATABASE_URL }}' \
             raghav1205/next_ds_visualizer:latest
-
