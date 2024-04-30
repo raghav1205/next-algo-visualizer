@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
                 explanation: body?.explanation,
                 description: body?.description,
                 componentName: body?.componentName,
+                category: body?.category,
             },
         });
         return Response.json({ message: "Success" });
