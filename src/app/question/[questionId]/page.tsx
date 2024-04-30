@@ -74,7 +74,7 @@ export default async function ({ params }: { params: { questionId: string } }) {
 
     return (
         <div className="overflow-auto">
-            <div className='text-center p-10 h-fit '>
+            <div className='text-center md:p-10 p-5 h-fit '>
                 <ProblemStatement name={data?.title ?? ''} statement={data?.description ?? ''} />
             </div>
             <div>

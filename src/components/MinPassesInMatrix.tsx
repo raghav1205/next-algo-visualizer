@@ -8,6 +8,10 @@ function MinPassesInMatrix() {
         [-5, 2, 0],
         [-6, -2, 0]
     ])
+    const [initialMatrix] = useState<number[][]>(() => {
+        return matrix.map(row => [...row]);
+    });
+
     const [queue, setQueue] = useState<[number, number][]>([])
     const [passes, setPasses] = useState<number>(0)
     const [currentELement, setCurrentElement] = useState<[number, number]>([-1, -1])
@@ -15,14 +19,13 @@ function MinPassesInMatrix() {
 
     const handleSolve = (matrix: number[][]) => {
         setIsRunning(true)
-        if (queue.length === 0) {
-            minimumPassesOfMatrix(matrix, setMatrix, queue, setQueue, passes, setPasses, setCurrentElement, setIsRunning);
-        }
+        setPasses(0)
+        minimumPassesOfMatrix(matrix, setMatrix, queue, setQueue, passes, setPasses, setCurrentElement, setIsRunning, initialMatrix);
     }
 
     return (
         <div className='bg-[#030712]  overflow-auto text-black'>
-            
+
 
             <div className='flex justify-center items-center  max-w-screen-2xl mx-auto w-full  '>
 
@@ -58,7 +61,7 @@ function MinPassesInMatrix() {
                                     queue.map(([r, c], i) => (
                                         r === -1 ?
                                             <div className='  flex justify-center items-center w-5 h-5' key={i}>
-                                                <p className='text-md text-center bg-black w-full h-full'></p>
+                                                <p className='text-md text-center bg-black border-2 border-white w-full h-full'></p>
                                             </div>
                                             :
                                             <div key={i} className='text-md text-center flex justify-center items-center border-r border-black bg-white text-black font-semibold w-5 h-5'>
@@ -77,7 +80,7 @@ function MinPassesInMatrix() {
                     </div>
 
                     <div className='flex justify-center mt-2 text-md font-semibold'>
-                        <button className='bg-[#F9FAFB] text-black border rounded-md p-2 px-3 disabled:bg-slate-300 ' disabled={isRunning } onClick={() => handleSolve(matrix)}>
+                        <button className='bg-[#F9FAFB] text-black border rounded-md p-2 px-3 disabled:bg-slate-300 ' disabled={isRunning} onClick={() => handleSolve(matrix)}>
                             Run Algorithm
                         </button>
                     </div>

@@ -28,3 +28,26 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(data);
 }
 
+export async function PUT(req: NextRequest) {
+    const body = await req.json();
+    try {
+        const data = await prisma.problem.update({
+            where: {
+                id: body?.id,
+            },
+            data: {
+                title: body?.title,
+                explanation: body?.explanation,
+                description: body?.description,
+                componentName: body?.componentName,
+                category: body?.category,
+            },
+        });
+        return Response.json({ message: "Success" });
+    }
+    catch (e) {
+        console.log(e);
+        return Response.json({ message: e });
+    }
+}
+
