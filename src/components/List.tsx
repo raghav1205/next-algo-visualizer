@@ -10,7 +10,7 @@ const List = ({ questionsList }: { questionsList: Question[] }) => {
     console.log(questionsList)
     return (
         <div className='p-5 text-lg'>
-            <h2>Problems</h2>
+            {/* <h2>Problems</h2> */}
             {
                 questionsList?.map((question, i) => (
                     <div key={question.id}>
